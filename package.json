@@ -1,0 +1,111 @@
+{
+  "name": "chordpro-vscode",
+  "displayName": "ChordPro",
+  "description": "ChordPro format support for VS Code - syntax highlighting, preview, transposition, and more",
+  "version": "0.1.0",
+  "publisher": "chordpro",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters"
+  ],
+  "keywords": [
+    "chordpro",
+    "chord",
+    "music",
+    "lyrics",
+    "guitar"
+  ],
+  "activationEvents": [
+    "onLanguage:chordpro"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "chordpro",
+        "aliases": [
+          "ChordPro",
+          "chordpro"
+        ],
+        "extensions": [
+          ".cho",
+          ".chopro",
+          ".chordpro",
+          ".crd"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "chordpro",
+        "scopeName": "source.chordpro",
+        "path": "./syntaxes/chordpro.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "chordpro.showPreview",
+        "title": "ChordPro: Show Preview"
+      },
+      {
+        "command": "chordpro.transposeUp",
+        "title": "ChordPro: Transpose Up (Half Step)"
+      },
+      {
+        "command": "chordpro.transposeDown",
+        "title": "ChordPro: Transpose Down (Half Step)"
+      },
+      {
+        "command": "chordpro.print",
+        "title": "ChordPro: Print Preview"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceLangId == chordpro",
+          "command": "chordpro.showPreview",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "chordpro.showPreview",
+        "key": "ctrl+shift+v",
+        "mac": "cmd+shift+v",
+        "when": "resourceLangId == chordpro"
+      },
+      {
+        "command": "chordpro.transposeUp",
+        "key": "ctrl+shift+up",
+        "mac": "cmd+shift+up",
+        "when": "resourceLangId == chordpro"
+      },
+      {
+        "command": "chordpro.transposeDown",
+        "key": "ctrl+shift+down",
+        "mac": "cmd+shift+down",
+        "when": "resourceLangId == chordpro"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "demo": "node demo/server.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.27",
+    "@types/vscode": "^1.107.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "express": "^4.22.1"
+  }
+}

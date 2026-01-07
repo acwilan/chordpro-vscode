@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChordPro Editor - Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>ChordPro Editor</h1>
+            <p class="subtitle">VS Code Extension Demo</p>
+        </header>
+        
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <button id="transposeDown" class="btn" title="Transpose Down">
+                    <span class="btn-icon">-</span> Transpose Down
+                </button>
+                <button id="transposeUp" class="btn" title="Transpose Up">
+                    <span class="btn-icon">+</span> Transpose Up
+                </button>
+            </div>
+            <div class="toolbar-group">
+                <button id="printBtn" class="btn btn-primary" title="Print Preview">
+                    Print Preview
+                </button>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span>Editor</span>
+                    <span class="file-indicator">.cho / .chopro / .chordpro</span>
+                </div>
+                <textarea id="editor" spellcheck="false" placeholder="Enter your ChordPro text here...
+
+Example:
+{title: Amazing Grace}
+{artist: John Newton}
+{key: G}
+
+{start_of_verse}
+[G]Amazing [G7]grace, how [C]sweet the [G]sound
+That [G]saved a [Em]wretch like [D]me
+{end_of_verse}"></textarea>
+            </div>
+            
+            <div class="preview-panel">
+                <div class="panel-header">
+                    <span>Preview</span>
+                    <span class="live-indicator">Live</span>
+                </div>
+                <div id="preview" class="preview-content"></div>
+            </div>
+        </div>
+        
+        <footer class="app-footer">
+            <p>ChordPro VS Code Extension - Syntax highlighting, preview, transposition, and print support</p>
+        </footer>
+    </div>
+    
+    <div id="printModal" class="modal hidden">
+        <div class="modal-content print-modal">
+            <div class="modal-header">
+                <h2>Print Preview</h2>
+                <button id="closePrintModal" class="btn-close">&times;</button>
+            </div>
+            <div id="printPreview" class="print-preview-content"></div>
+            <div class="modal-footer">
+                <button id="printNow" class="btn btn-primary">Print</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
