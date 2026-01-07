@@ -4,8 +4,26 @@
 A VS Code extension for managing ChordPro files - the popular format for chord/lyric sheets used by musicians.
 
 ## Current State
-- **Status**: MVP Complete
+- **Status**: MVP Complete, ready for publishing
 - **Demo**: Web-based demo running on port 5000
+
+## Publishing
+
+### Required GitHub Secrets
+- `VSCE_PAT`: Azure DevOps Personal Access Token with Marketplace (Manage) scope
+- `OVSX_PAT`: Open VSX token (optional, for Open VSX Registry)
+
+### Required GitHub Variables
+- `PUBLISH_OPEN_VSX`: Set to `true` to also publish to Open VSX Registry
+
+### Before Publishing
+1. Update `publisher` in package.json to your publisher ID
+2. Update repository URLs in package.json to your GitHub repo
+3. Create a publisher at https://marketplace.visualstudio.com/manage
+
+### To Publish
+- Push a tag like `v0.1.0` to trigger automatic publishing
+- Or use the "Run workflow" button in GitHub Actions
 
 ## Features
 

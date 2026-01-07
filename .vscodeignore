@@ -1,0 +1,14 @@
+.vscode/**
+.vscode-test/**
+src/**
+demo/**
+node_modules/**
+.gitignore
+.github/**
+*.map
+*.ts
+tsconfig.json
+attached_assets/**
+replit.md
+.replit
+replit.nix
