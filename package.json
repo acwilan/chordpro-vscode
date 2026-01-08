@@ -15,7 +15,7 @@
   },
   "homepage": "https://github.com/acwilan/chordpro-vscode#readme",
   "engines": {
-    "vscode": "^1.74.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
     "Programming Languages",
@@ -112,7 +112,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.19.27",
-    "@types/vscode": "^1.107.0",
+    "@types/vscode": "^1.85.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
