@@ -3,17 +3,17 @@
   "displayName": "ChordPro",
   "description": "ChordPro format support for VS Code - syntax highlighting, preview, transposition, and more",
   "version": "0.1.0",
-  "publisher": "YOUR_PUBLISHER_ID",
+  "publisher": "Homeputers",
   "license": "MIT",
   "icon": "icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/chordpro-vscode"
+    "url": "https://github.com/acwilan/chordpro-vscode"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/chordpro-vscode/issues"
+    "url": "https://github.com/acwilan/chordpro-vscode/issues"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/chordpro-vscode#readme",
+  "homepage": "https://github.com/acwilan/chordpro-vscode#readme",
   "engines": {
     "vscode": "^1.74.0"
   },
