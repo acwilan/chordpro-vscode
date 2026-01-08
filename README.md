@@ -1,4 +1,4 @@
-# ChordPro for VS Code
+# YA ChordPro for VS Code
 
 A VS Code extension for editing ChordPro files - the popular format for chord/lyric sheets used by musicians.
 
@@ -54,7 +54,7 @@ Place chords in square brackets inline with lyrics:
 
 Search for "ChordPro" in the VS Code Extensions view, or install from the command line:
 ```bash
-code --install-extension YOUR_PUBLISHER_ID.chordpro-vscode
+code --install-extension Homeputers.ya-chordpro
 ```
 
 ## License

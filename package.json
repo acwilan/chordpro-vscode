@@ -1,6 +1,6 @@
 {
-  "name": "chordpro-vscode",
-  "displayName": "ChordPro",
+  "name": "ya-chordpro",
+  "displayName": "YA ChordPro",
   "description": "ChordPro format support for VS Code - syntax highlighting, preview, transposition, and more",
   "version": "0.1.0",
   "publisher": "Homeputers",
