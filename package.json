@@ -2,7 +2,7 @@
   "name": "ya-chordpro",
   "displayName": "YA ChordPro",
   "description": "ChordPro format support for VS Code - syntax highlighting, preview, transposition, and more",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "publisher": "Homeputers",
   "license": "MIT",
   "icon": "icon.png",
