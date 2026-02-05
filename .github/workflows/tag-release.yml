@@ -7,13 +7,12 @@ on:
     branches:
       - main
 
-permissions:
-  contents: write
-
 jobs:
   tag:
     if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     runs-on: ubuntu-latest
+    env:
+      RELEASE_PAT: ${{ secrets.RELEASE_PAT }}
     steps:
       - name: Checkout merged commit
         uses: actions/checkout@v4
@@ -35,7 +34,12 @@ jobs:
       - name: Create and push tag
         env:
           VERSION: ${{ steps.version.outputs.version }}
+          REPOSITORY: ${{ github.repository }}
         run: |
+          if [ -z "$RELEASE_PAT" ]; then
+            echo "Missing RELEASE_PAT secret. Aborting."
+            exit 1
+          fi
           TAG="v$VERSION"
           if git rev-parse "$TAG" >/dev/null 2>&1; then
             echo "Tag $TAG already exists. Skipping push."
@@ -43,5 +47,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${RELEASE_PAT}@github.com/${REPOSITORY}.git"
           git tag "$TAG"
           git push origin "$TAG"
