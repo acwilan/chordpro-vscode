@@ -108,7 +108,8 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "demo": "node demo/server.js"
+    "demo": "node demo/server.js",
+    "changelog": "node scripts/update-changelog.cjs"
   },
   "devDependencies": {
     "@types/node": "^20.19.27",
