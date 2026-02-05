@@ -2,6 +2,12 @@
 
 All notable changes to the ChordPro extension will be documented in this file.
 
+## [0.1.5](https://github.com/acwilan/chordpro-vscode/compare/v0.1.4...v0.1.5) (2026-02-05)
+
+### CI
+- fix changelog generation (#7) ([0d17277](https://github.com/acwilan/chordpro-vscode/commit/0d1727748fb8621498b3d133f6953d5a569b16b3))
+- fix tag-release workflow (#6) ([674bd15](https://github.com/acwilan/chordpro-vscode/commit/674bd155eedc6266f4e7b880252b49b271e59a39))
+
 ## [0.1.4](https://github.com/acwilan/chordpro-vscode/compare/v0.1.2...v0.1.4) (2026-02-05)
 
 ### CI
