@@ -31,6 +31,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+          fetch-tags: true
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -58,7 +59,7 @@ jobs:
           echo "title_version=v$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Generate changelog
-        run: npx --yes conventional-changelog-cli@5.0.0 -p conventionalcommits -i CHANGELOG.md -s
+        run: node scripts/update-changelog.cjs
 
       - name: Create release pull request
         uses: peter-evans/create-pull-request@v6
