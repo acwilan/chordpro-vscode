@@ -50,3 +50,26 @@ jobs:
           git remote set-url origin "https://x-access-token:${RELEASE_PAT}@github.com/${REPOSITORY}.git"
           git tag "$TAG"
           git push origin "$TAG"
+
+      - name: Trigger publish workflow
+        env:
+          REPOSITORY: ${{ github.repository }}
+          TAG: v${{ steps.version.outputs.version }}
+        run: |
+          if [ -z "$RELEASE_PAT" ]; then
+            echo "Missing RELEASE_PAT secret. Cannot dispatch publish workflow."
+            exit 1
+          fi
+          PAYLOAD=$(printf '{"ref":"%s"}' "$TAG")
+          RESPONSE=$(curl -s -o /tmp/dispatch-response -w "%{http_code}" \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${RELEASE_PAT}" \
+            "https://api.github.com/repos/${REPOSITORY}/actions/workflows/publish.yml/dispatches" \
+            -d "$PAYLOAD")
+          if [ "$RESPONSE" != "204" ]; then
+            echo "Failed to dispatch publish workflow (HTTP $RESPONSE)."
+            cat /tmp/dispatch-response
+            exit 1
+          fi
+          echo "Publish workflow dispatched for $TAG"
