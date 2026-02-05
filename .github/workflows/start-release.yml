@@ -1,0 +1,77 @@
+name: Start Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump_type:
+        description: 'Select the next version number'
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - custom
+      custom_version:
+        description: 'Exact version (required when bump_type = custom)'
+        required: false
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    environment:
+      name: release
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Bump version
+        id: bump_version
+        env:
+          BUMP_TYPE: ${{ github.event.inputs.bump_type }}
+          CUSTOM_VERSION: ${{ github.event.inputs.custom_version }}
+        run: |
+          if [ "$BUMP_TYPE" = "custom" ]; then
+            if [ -z "$CUSTOM_VERSION" ]; then
+              echo "custom_version is required when bump_type is custom" >&2
+              exit 1
+            fi
+            npm version "$CUSTOM_VERSION" --no-git-tag-version
+          else
+            npm version "$BUMP_TYPE" --no-git-tag-version
+          fi
+
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "title_version=v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Generate changelog
+        run: npx --yes conventional-changelog-cli@5.0.0 -p conventionalcommits -i CHANGELOG.md -s
+
+      - name: Create release pull request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: prepare release v${{ steps.bump_version.outputs.version }}"
+          title: "Release v${{ steps.bump_version.outputs.version }}"
+          body: |
+            ## Summary
+            - Prepare release v${{ steps.bump_version.outputs.version }}
+            - Version bump triggered via workflow_dispatch
+
+            This pull request was created automatically. Please review the changelog updates before merging.
+          branch: release/v${{ steps.bump_version.outputs.version }}
+          base: main
+          delete-branch: false
